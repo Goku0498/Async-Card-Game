@@ -1,13 +1,13 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     background-color: #4c7766;
 }
 
-.container{
+.container {
     background-color: #4c7766;
     display: grid;
     grid-template-columns: 1fr;
@@ -17,23 +17,23 @@ body{
     transition: height 500ms;
 }
 
-.container-1{
+.container-1 {
     transition: ease-in 500ms;
     background-color: #4c7766;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 0.1fr 400px;
+    grid-template-rows: 0.3fr 0.1fr 1fr 0.1fr 1.8fr;
     align-items: center;
     justify-items: center;
 }
 
-.title{
+.title {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.header{
+.header {
     box-sizing: border-box;
     border-radius: 50px;
     text-align: center;
@@ -45,44 +45,47 @@ body{
     margin-top: 10px;
 }
 
-.para{
+.para {
     color: #EBE6E0;
     font-size: 18px;
     text-align: center;
     margin: 15px 25px 15px 25px;
 }
 
-.radio-div{
-    margin: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.radio-div {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
     background-color: #197c24;
     border-radius: 10px;
 }
 
-.radio-div input,label{
-    margin: 5px;
+.radio-div input {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.radio-div label{
+.radio-div label {
+    margin-right: 5px;
     font-size: 20px;
 }
 
-.radio-btn{
+.radio-btn {
     border-radius: 10px;
 }
 
-.radio-btn:has(input:checked){
+.radio-btn:has(input:checked) {
     background-color: #d0ede1;
 }
 
-.button{
+.button {
     font-size: 20px;
     background-color: #0d7c4ed2;
     color: rgb(255, 223, 181);
     border-radius: 50px;
     padding: 5px;
-    font-family: "Playwrite CU", cursive;
+    margin: 5px;
+    font-family: "Playwrite CU";
     font-optical-sizing: auto;
     font-weight: bold;
     font-style: normal;
@@ -90,32 +93,25 @@ body{
     cursor: pointer;
 }
 
-.button:hover{
-    transform: translateY(-5px);
-}
-
-
-.cont1{
+.cont1 {
     transition: ease-in-out 500ms;
     margin-top: 10px;
     margin-bottom: 10px;
-    display: grid;
-    width: 75%;
-    height: 75%;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: auto;
-    column-gap: 5px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-around;
     background-color: #2a5534;
     border-radius: 15px;
-    justify-items: center;
-    align-items: center;
 }
 
-.card-img{
+.card-img {
     width: auto;
-    height: 250px;
+    height: 200px;
     border-radius: 10px;
-    margin: auto;
+    margin: 10px;
     transition: ease-in 400ms;
     cursor: pointer;
 }
@@ -125,17 +121,45 @@ body{
     box-shadow: 0 3px 3px 0 rgba(200, 200, 200, 0.632);
 }
 
-.cont-2a{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: auto;
-    column-gap: 5px;
+.cont-2a {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     background-color: #224e27;
     border-radius: 15px;
-    justify-self: center;
-    align-self: center;
+    justify-content: space-evenly;
+    width: 70%;
+    height: auto;
+    padding: 10px;
+    gap: 5px;
 }
 
-/* border: 2px #eaff76 solid; */
+.card-slot {
+    width: 135px;
+    height: 190px;
+    border-radius: 10px;
+    background-color: #ebf7ed;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.highlight {
+    border: 3px solid yellow;
+    box-shadow: 0 0 10px yellow;
+    transform: scale(1.05);
+    transition: border 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+
+.highlight-slot {
+    border: 2px solid red;
+}
+
+.card-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
