@@ -60,6 +60,13 @@ body {
     margin: 15px 25px 15px 25px;
 }
 
+.para-1 {
+    color: #EBE6E0;
+    font-size: 14px;
+    text-align: center;
+    margin: 5px 25px 5px 25px;
+}
+
 .radio-div {
     display: flex;
     flex-wrap: nowrap;
