@@ -34,8 +34,6 @@ body {
 }
 
 .header {
-    box-sizing: border-box;
-    border-radius: 50px;
     text-align: center;
     color: #EBE6E0;
     font-family: "Nerko One", cursive;
@@ -43,6 +41,16 @@ body {
     font-style: italic;
     font-size: 65px;
     margin-top: 10px;
+}
+
+.header-1 {
+    text-align: center;
+    color: #EBE6E0;
+    font-family: "Nerko One", cursive;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 45px;
+    margin-top: 5px;
 }
 
 .para {
