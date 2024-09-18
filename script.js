@@ -61,7 +61,7 @@ async function get_info(link) {
 function displayCards(cards) {
     container.classList.remove("container");
     container.classList.add("container-1");
-    title.innerHTML = `<h1 class="header">Suit Sprint</h1>`;
+    title.innerHTML = `<h3 class="header">Suit Sprint</h3>`;
     cont1.className = "cont1";
     for (let i = 0; i < cards.length; i++) {
         let card_image = document.createElement("div");
