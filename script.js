@@ -6,25 +6,38 @@ title.classList.add("title");
 title.innerHTML = `
     <h1 class="header">Suit Sprint</h1>
     <p class="para">
-    Welcome to Suit Sprint, the ultimate card challenge! Test your speed and strategy as you race against the clock to arrange a full suit of your choice. Sharpen your skills, compete with friends, and see if you can conquer the clock and complete the perfect hand. How fast can you suit up?</p>
+    Welcome to Suit Sprint, the ultimate card challenge! Test your speed and strategy as you race against the clock to arrange a full suit of cards. Can you conquer the clock and complete the perfect hand?</p>
 `;
 
-let radio_button = document.createElement("div");
-radio_button.className = "radio-div";
-radio_button.innerHTML = `<div class="radio-btn">
-    <label for="full_suit"><input type="radio" class="full_suit" name="game_select" onclick="get_card()" value="full_suit">Full Suit</label>
-    </div>`;
+//Get Card Button and its funcationality
+let getCardButton = document.createElement("div");
+getCardButton.className = "button-div";
+getCardButton.innerHTML = `<button class="button" onclick="generate()" >Get Card</button>`;
 
+
+//div tags for cont1, cont2 and shuffle Button
 let cont1 = document.createElement("div");
 let shuffle_btn = document.createElement("div");
 let cont2 = document.createElement("div");
 
-function get_card() {
-    cont1.innerHTML = `<div class="button-div" onclick="generate()"><button class="button">Get Card</button></div>`;
-}
+
+let timerDisplay = document.createElement("div");
+timerDisplay.classList.add("timer");
+timerDisplay.innerHTML = "Time: 0 sec";
+
+//Variables for timer function
+let startTime, timerInterval;
+let elapsedTime = 0;
+let running = false;
+let cardsMoved = 0;
+
+let resetBtn = document.createElement("div");
+resetBtn.classList.add("button-div");
+resetBtn.innerHTML = `<button class="button" onclick="resetGame()">Reset Game</button>`;
 
 // Function to fetch cards and display them in cont1
 async function generate() {
+    getCardButton.style.display = "none";
     cont1.innerHTML = "";
     let api_url = "https://www.deckofcardsapi.com/api/deck/new/draw/?count=5";
     try {
@@ -48,10 +61,8 @@ async function get_info(link) {
 function displayCards(cards) {
     container.classList.remove("container");
     container.classList.add("container-1");
-    title.innerHTML = `<h1 class="header">Card Game</h1>`;
+    title.innerHTML = `<h1 class="header">Suit Sprint</h1>`;
     cont1.className = "cont1";
-    
-    // Display cards in cont1
     for (let i = 0; i < cards.length; i++) {
         let card_image = document.createElement("div");
         let img_link = cards[i].image;
@@ -64,17 +75,42 @@ function displayCards(cards) {
     shuffle_btn.addEventListener('click', () => shuffleCards(cards));
     cont2.classList.add("cont-2a");
     
-    // Creating empty slots in cont2
+    //Method to display empty slots in cont2
     for (let i = 0; i < 13; i++) {
         let emptySlot = document.createElement("div");
         emptySlot.classList.add("card-slot");
         emptySlot.addEventListener('click', () => selectSlot(emptySlot));
         cont2.appendChild(emptySlot);
     }
+
+    container.appendChild(cont1);
+    container.appendChild(shuffle_btn);
+    container.appendChild(cont2);
+    container.appendChild(timerDisplay);
+    container.appendChild(resetBtn)
 }
 
 let selectedCard = null;
 let selectedSlot = null;
+
+// Timer functions
+function startTimer() {
+    if (!running) {
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 1000);
+        running = true;
+    }
+}
+
+function updateTimer() {
+    elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    timerDisplay.innerHTML = `Time: ${elapsedTime} sec`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    running = false;
+}
 
 // Function to highlight and select a card in cont1
 function highlightCard(cardElement, cardData) {
@@ -106,13 +142,22 @@ function selectSlot(slotElement) {
         selectedCard.querySelector('img').alt = "";
         selectedCard.classList.remove("highlight");
         selectedCard = null;
+
+        cardsMoved++;
+        if (cardsMoved === 1) {
+            startTimer();
+        }
+        if (cardsMoved === 13) {
+            stopTimer();
+        }
     }
 }
 
 // Function to remove a card from cont2
 function removeCard(slotElement) {
-    slotElement.innerHTML = ""; // Remove the card
-    slotElement.classList.remove("highlight-slot"); // Remove highlight from the slot
+    slotElement.innerHTML = "";
+    slotElement.classList.remove("highlight-slot");
+    cardsMoved--;
 }
 
 // Function to shuffle the cards in cont1 instantly
@@ -125,11 +170,32 @@ async function shuffleCards(cards) {
     }
 }
 
+//Creating a Reset
+function resetGame() {
+    cont2.classList.remove("cont-2a");
+    cont1.innerHTML = "";
+    cont2.innerHTML = "";
+    shuffle_btn.innerHTML = "";
+    timerDisplay.innerHTML = "";
+    resetBtn.innerHTML = "";
+    cardsMoved = 0;
+    elapsedTime = 0;
+    clearInterval(timerInterval);
+    running = false;
+
+    container.classList.remove("container-1");
+    container.classList.add("container");
+    
+    title.innerHTML = `
+        <h1 class="header">Suit Sprint</h1>
+        <p class="para">
+        Welcome to Suit Sprint, the ultimate card challenge! Test your speed and strategy as you race against the clock to arrange a full suit of cards. Can you conquer the clock and complete the perfect hand?</p>
+    `;
+    getCardButton.style.display = "block";
+}
+
+
 // Append elements to the container
 container.appendChild(title);
-container.appendChild(radio_button);
-container.appendChild(cont1);
-container.appendChild(shuffle_btn);
-container.appendChild(cont2);
-
+container.appendChild(getCardButton);
 document.body.append(container);

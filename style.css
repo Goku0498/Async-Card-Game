@@ -22,7 +22,7 @@ body {
     background-color: #4c7766;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.3fr 0.1fr 1fr 0.1fr 1.8fr;
+    grid-template-rows: 0.3fr 0.7fr 0.1fr 1.8fr 0.2fr 0.2fr;
     align-items: center;
     justify-items: center;
 }
@@ -109,7 +109,7 @@ body {
 
 .card-img {
     width: auto;
-    height: 200px;
+    height: 190px;
     border-radius: 10px;
     margin: 10px;
     transition: ease-in 400ms;
@@ -136,7 +136,7 @@ body {
 
 .card-slot {
     width: 135px;
-    height: 190px;
+    height: 180px;
     border-radius: 10px;
     background-color: #ebf7ed;
     cursor: pointer;
@@ -162,4 +162,11 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.timer {
+    font-size: 24px;
+    color: white;
+    margin-left: 20px;
+    margin-top: 10px;
 }
